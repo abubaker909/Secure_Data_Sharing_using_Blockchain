@@ -32,10 +32,4 @@ The Flask app will start, and you can access it in your browser at [http://local
 
 If you find any issues or have suggestions for improvement, feel free to open an issue or create a pull request.
 
-## License
 
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-Feel free to expand the README with more details about the implementation, future enhancements, or any additional functionalities you might add to the project.
