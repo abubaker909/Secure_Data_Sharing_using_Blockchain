@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Transaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>New Transaction</h1>
+
+        <form id="transactionForm" action="/transactions/new" method="post" enctype="application/json">
+            <label for="sender">Sender:</label>
+            <input type="text" id="sender" name="sender" required>
+
+            <label for="recipient">Recipient:</label>
+            <input type="text" id="recipient" name="recipient" required>
+
+            <label for="data">Data:</label>
+            <textarea id="data" name="data" rows="4" required></textarea>
+
+            <label for="signature">Signature:</label>
+            <input type="text" id="signature" name="signature" required>
+
+            <!-- Button to submit the transaction -->
+            <button type="button" onclick="submitTransaction()">Submit Transaction</button>
+
+            <!-- Button to navigate to the full chain page -->
+            <button type="button" onclick="showChain()">Show Chain</button>
+
+	<!-- Add the following button to navigate to the home page -->
+	<button onclick="window.location.href='/'">Go to Home</button>
+
+	<!-- Add the following button to navigate to the mining page -->
+	<button onclick="window.location.href='/mine'">Mine a new block</button>
+        </form>
+    </div>
+
+    <script>
+        function submitTransaction() {
+            // Get form data
+            var sender = document.getElementById("sender").value;
+            var recipient = document.getElementById("recipient").value;
+            var data = document.getElementById("data").value;
+            var signature = document.getElementById("signature").value;
+
+            // Create JSON object
+            var transactionData = {
+                "sender": sender,
+                "recipient": recipient,
+                "data": data,
+                "signature": signature
+            };
+
+            // Send JSON data using fetch
+            fetch('/transactions/new', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(transactionData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                // Handle the response as needed
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function showChain() {
+            // Redirect to the /chain endpoint
+            window.location.href = '/chain';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain - Full Chain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+	 button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .block {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        .block-index {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .block-data {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Full Blockchain</h1>
+
+        {% for block in chain %}
+            <div class="block">
+                <p class="block-index">Block #{{ block.index }}</p>
+                <p>Timestamp: {{ block.timestamp }}</p>
+                <p>Proof: {{ block.proof }}</p>
+                <p>Previous Hash: {{ block.previous_hash }}</p>
+                <div class="block-data">
+                    <p>Transactions:</p>
+                    <ul>
+                        {% for transaction in block.transactions %}
+                            <li>
+                                <strong>Sender:</strong> {{ transaction.sender }}<br>
+                                <strong>Recipient:</strong> {{ transaction.recipient }}<br>
+                                <strong>Data:</strong> {{ transaction.data }}<br>
+                                <strong>Signature:</strong> {{ transaction.signature }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+	<!-- Add the following button to navigate to the home page -->
+<br><button onclick="window.location.href='/'">Go to Home</button>
+
+<!-- Add the following button to navigate to the mining page -->
+<button onclick="window.location.href='/mine'">Mine a new block</button>
+
+<!-- Add the following button to navigate to the transaction page -->
+<button onclick="window.location.href='/transaction'">Create a new transaction</button>
+
+    </div>
+</body>
+</html>

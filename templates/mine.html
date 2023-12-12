@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine a New Block</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .mining-content {
+            text-align: left;
+            padding: 20px;
+            background-color: #e6f7ff;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Mine a New Block</h1>
+
+        <div class="mining-content">
+            <h2>Mining Content:</h2>
+            <p>During the mining process, your server is working to find a valid proof-of-work for the new block. Here are the key steps:</p>
+            <ol>
+                <li>Verify pending transactions.</li>
+                <li>Find a valid proof-of-work for the new block.</li>
+                <li>Create a new block with the proof and add it to the blockchain.</li>
+                <li>Receive a mining reward.</li>
+            </ol>
+            <p>Click the "Mine Now" button to initiate the mining process.</p>
+        </div>
+
+        <button onclick="mine()">Mine Now</button>
+
+        <h2>Mining Result:</h2>
+        <pre id="miningResult"></pre>
+
+        <script>
+            function mine() {
+                // Use JavaScript to make an AJAX request to the /mine endpoint
+                fetch('/mine')
+                    .then(response => response.text())
+                    .then(data => {
+                        // Display the mining result on the page
+                        document.getElementById('miningResult').innerHTML = data;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
+        <!-- Add the following button to navigate to the home page -->
+        <br><button onclick="window.location.href='/'">Go to Home</button>
+
+        <!-- Add the following button to navigate to the transaction page -->
+        <button onclick="window.location.href='/transaction'">Create a new transaction</button>
+
+        <!-- Add the following button to navigate to the full chain page -->
+        <button onclick="window.location.href='/chain'">View the full blockchain</button>
+
+    </div>
+</body>
+</html>
